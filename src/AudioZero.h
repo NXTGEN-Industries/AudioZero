@@ -30,6 +30,10 @@ public:
 //	void prepare(int volume); //not implemented yet
 	void play(File myFile) ;
 	void end();
+	void stop()
+	{
+		isPlaying_ = false;
+	}
 
 private:
 	void dacConfigure(void);
@@ -39,6 +43,8 @@ private:
 	void tcReset(void);
 	void tcEnable(void);
 	void tcDisable(void);
+
+	bool isPlaying_ = false;
 };
 
 extern AudioZeroClass AudioZero;

@@ -43,7 +43,8 @@ void AudioZeroClass::begin(uint32_t sampleRate) {
 void AudioZeroClass::end() {
 	tcDisable();
 	tcReset();
-	analogWrite(A0, 0);	
+	analogWrite(A0, 0);
+        free(__WavSamples);
 }
 
 /*void AudioZeroClass::prepare(int volume){
@@ -51,7 +52,8 @@ void AudioZeroClass::end() {
 }*/
 
 void AudioZeroClass::play(File myFile) {
-while (myFile.available()) {
+  isPlaying_ = true;
+while (myFile.available() && isPlaying_) {
 	 if (!__StartFlag)
     {
       myFile.read(__WavSamples, __NumberOfSamples);
